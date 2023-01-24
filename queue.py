@@ -30,15 +30,23 @@ def printSentItems(queue):
     if len(queue) > 0:
         print("Size : " + str(len(queue)))
 
-        n = 0
-        sum = 0
+        n = []
+        sum = []
+
+        for p in range(2):
+            sum.append(0)
+            n.append(0)
+
         for items in queue:
-            n = n + 1
+
+            n[items.numberOfQueue] = n[items.numberOfQueue] + 1
             delay = items.transmissionTime - items.arrivalTime
-            sum = sum + delay
+            sum[items.numberOfQueue]  = sum[items.numberOfQueue] + delay
             print("Queue: " + str(items.numberOfQueue + 1)+ " Packet: " + items.packetValue+" ,arrvial time: "+ "{0:.3f}".format(items.arrivalTime)+ " transmission time: "+"{0:.3f}".format(items.transmissionTime)+ " delay: "+"{0:.3f}".format(delay))
 
-        print("Average: "+str(sum/n))
+        for k in range(2):
+            if n[k] > 0:
+                print("Average: Queue "+str(k + 1)+" - "+str(sum[k] /n[k]))
 
     else:
         print("(Empty)")
